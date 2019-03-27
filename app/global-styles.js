@@ -1,30 +1,29 @@
 import { createGlobalStyle } from 'styled-components';
 
+import '!file-loader?name=[name].[ext]!./images/bottom_octopus.png';
+
 const GlobalStyle = createGlobalStyle`
   html,
   body {
-    height: 100%;
+    min-height: 100%;
+    min-height: 100%;
     width: 100%;
   }
 
   body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  }
-
-  body.fontLoaded {
-    font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Pangolin', cursive;
+    color: blue;
+    background-color: black;
+    background-image: linear-gradient(to top, #0046ff, black, black);
   }
 
   #app {
-    background-color: #fafafa;
+    padding-bottom: 300px;
     min-height: 100%;
     min-width: 100%;
-  }
-
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
+    background-image: url('/bottom_octopus.png');
+    background-repeat: repeat-x;
+    background-position: center bottom;
   }
 `;
 
