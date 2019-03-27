@@ -33,6 +33,18 @@ function kanbanBoardPageReducer(state = initialState, action) {
           ),
         );
 
+    case constants.TASK_UPDATE:
+      return state.set(
+        'tasks',
+        state.get('tasks').set(
+          action.taskId,
+          state
+            .get('tasks')
+            .get(action.taskId)
+            .set('status', action.destination),
+        ),
+      );
+
     default:
       return state;
   }

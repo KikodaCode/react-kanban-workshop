@@ -19,3 +19,10 @@ export const kanbanBoardLoadFail = error => ({
   type: constants.KANBAN_BOARD_LOAD_FAIL,
   error,
 });
+
+export const taskUpdate = (taskId, source, destination) => ({
+  type: constants.TASK_UPDATE,
+  taskId,
+  source,
+  destination,
+});

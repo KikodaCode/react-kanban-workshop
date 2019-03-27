@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Droppable } from 'react-beautiful-dnd';
 
 import Column from 'components/Column';
 import ColumnContainer from 'components/ColumnContainer';
@@ -12,15 +13,25 @@ import taskPropTypes from 'propTypes/task';
 import * as selectors from './selectors';
 
 export const KanbanColumn = ({ column, tasks }) => (
-  <Column>
-    <StatusHeaderTop />
-    <StatusHeader>{column.name}</StatusHeader>
-    <ColumnContainer>
-      {tasks.map(task => (
-        <KanbanCard color={column.color} key={task.id} task={task} />
-      ))}
-    </ColumnContainer>
-  </Column>
+  <Droppable droppableId={column.name}>
+    {provided => (
+      <Column>
+        <StatusHeaderTop />
+        <StatusHeader>{column.name}</StatusHeader>
+        <ColumnContainer ref={provided.innerRef} {...provided.droppableProps}>
+          {tasks.map((task, index) => (
+            <KanbanCard
+              color={column.color}
+              key={task.id}
+              task={task}
+              index={index}
+            />
+          ))}
+          {provided.placeholder}
+        </ColumnContainer>
+      </Column>
+    )}
+  </Droppable>
 );
 
 KanbanColumn.propTypes = {

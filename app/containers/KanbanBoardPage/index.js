@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { DragDropContext } from 'react-beautiful-dnd';
 
 import Container from 'components/Container';
 import BoardHeader from 'components/BoardHeader';
@@ -28,15 +29,27 @@ export class KanbanBoardPage extends React.Component {
     this.props.dispatch(actions.kanbanBoardLoad());
   }
 
+  onDragEnd = ({ draggableId: taskId, source, destination }) => {
+    console.log('taskId', taskId);
+    console.log('from', source.droppableId);
+    if (destination == null) return;
+    console.log('to', destination.droppableId);
+    this.props.dispatch(
+      actions.taskUpdate(taskId, source.droppableId, destination.droppableId),
+    );
+  };
+
   render() {
     const { columns } = this.props;
     return (
       <Container>
         <BoardHeader />
         <Board>
-          {columns.map(column => (
-            <KanbanColumn key={column.name} column={column} />
-          ))}
+          <DragDropContext onDragEnd={this.onDragEnd}>
+            {columns.map(column => (
+              <KanbanColumn key={column.name} column={column} />
+            ))}
+          </DragDropContext>
         </Board>
       </Container>
     );
