@@ -43,7 +43,7 @@
 
 ## Workshop instructions
 
-1. Install [`react-beatiful-dnd`](https://github.com/atlassian/react-beautiful-dnd).
+1. Install [`react-beautiful-dnd`](https://github.com/atlassian/react-beautiful-dnd).
 2. Add `DragDropContext` to `KanbanBoardPage`
 3. Add `Droppable` to `KanbanColumn`
 4. Add `Draggable` to `KanbanCard`, mapping the `index` prop from the task list.
